@@ -1,4 +1,5 @@
 package com.example.mvipractice.ui_layer.viewmodel
 
-class MovieIntent {
+sealed class MovieIntent {
+     object LoadsMovies : MovieIntent()
 }
