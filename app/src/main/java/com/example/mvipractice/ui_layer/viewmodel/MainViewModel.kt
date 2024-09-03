@@ -28,8 +28,12 @@ class MainViewModel @Inject constructor(
             val movies = repoImpl.getMovies()
             _state.value = MovieViewState(loading = false, movies = movies)
         } catch (e: Exception) {
-            _state.value =
-                MovieViewState(loading = false, error = e.message ?: "Error fetching movies")
+            _state.value = _state.value.copy(
+                loading = false,
+                error = e.message ?: "Error fetching movies"
+            )
+            e.printStackTrace() // Add this to see the exact exception in the logcat
         }
     }
+
 }
