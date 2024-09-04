@@ -15,6 +15,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -28,8 +29,9 @@ fun MovieScreen(mainViewModel: MainViewModel) {
     val state by mainViewModel.state.collectAsState()
 
     LaunchedEffect(mainViewModel) {
-        mainViewModel.handleIntent(MovieIntent.LoadsMovies)
+        mainViewModel.handleIntent(MovieIntent.LoadMovies)
     }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45,15 +47,14 @@ fun MovieScreen(mainViewModel: MainViewModel) {
             }
 
             else -> {
-                MovieList(movies = state.movies)
+                MoviesList(movies = state.movies)
             }
         }
-
     }
 }
 
 @Composable
-fun MovieList(movies: List<Movie>) {
+fun MoviesList(movies: List<Movie>) {
     LazyColumn {
         items(movies) { movie ->
             Card(
@@ -62,13 +63,11 @@ fun MovieList(movies: List<Movie>) {
                     .padding(8.dp)
                     .shadow(4.dp, RoundedCornerShape(8.dp))
             ) {
-                Text(text = "Movie : ${movie.title}", modifier = Modifier.padding(4.dp))
-                Text(text = "Date : ${movie.year}", modifier = Modifier.padding(4.dp))
-
+                Text(text = "Movie: ${movie.title}",
+                    modifier = Modifier.padding(4.dp))
+                Text(text = "Date: ${movie.year}",
+                    modifier = Modifier.padding(4.dp))
             }
-
         }
-
     }
-
 }

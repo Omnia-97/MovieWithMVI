@@ -5,8 +5,8 @@ import com.example.mvipractice.data_layer.domain.Movie
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class RepoImpl @Inject constructor() {
-    suspend fun getMovies() : List<Movie>{
+class MovieRepository @Inject constructor() {
+    suspend fun getMovies() : List<Movie> {
         delay(2000)
         return listOf(
             Movie(1, "Alita Battle Angel", "2019"),
